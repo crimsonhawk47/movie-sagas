@@ -4,13 +4,16 @@ import './App.css';
 //Import Components
 import Details from '../Details/Details'
 import Edit from '../Edit/Edit'
-import List from '../List'
+import List from '../List/List'
 
 class App extends Component {
   // Renders the entire app on the DOM
   render() {
     return (
       <div className="App">
+        <List />
+        <Edit />
+        <Details />
       </div>
     );
   }

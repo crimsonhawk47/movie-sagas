@@ -10,6 +10,7 @@ import logger from 'redux-logger';
 // Import saga middleware
 import createSagaMiddleware from 'redux-saga';
 import {takeEvery, put} from 'redux-saga/effects'
+import axios from 'axios';
 
 // Create the rootSaga generator function
 function* rootSaga() {
@@ -19,8 +20,9 @@ function* rootSaga() {
 }
 
 function* getMovies(){
-    console.log(`Heyooo`);
-    
+    let response = yield axios.get('/api/movies')
+    console.log(response.data);
+    yield put({type: 'SET_MOVIES', payload:response.data})
 }
 
 
@@ -31,6 +33,8 @@ const sagaMiddleware = createSagaMiddleware();
 const movies = (state = [], action) => {
     switch (action.type) {
         case 'SET_MOVIES':
+            console.log(`IAM REDUCER`);
+            console.log(action.payload);
             return action.payload;
         default:
             return state;

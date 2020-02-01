@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'
+import MovieCard from '../MovieCard/MovieCard'
 class List extends Component{
 
     componentDidMount(){
@@ -9,7 +10,12 @@ class List extends Component{
     render(){
         return(
         <div>
-            I am List Component
+            <ul>
+            {this.props.reduxStore.movies.map(movie => {
+                
+                return <MovieCard id={movie.id} key={movie.id} />
+            })}
+            </ul>
         </div>
         )
     

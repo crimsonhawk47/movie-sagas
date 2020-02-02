@@ -4,8 +4,8 @@ import { connect } from 'react-redux'
 import './App.css';
 
 //Import Components
-import Details from '../Details/Details'
-import Edit from '../Edit/Edit'
+import Edit from '../Details/Details'
+import Details from '../Edit/Edit'
 import List from '../List/List'
 
 class App extends Component {
@@ -20,7 +20,7 @@ class App extends Component {
         <div className="App">
           <Route path="/" exact component={List} />
           <Route path="/edit" component={Edit} />
-          <Route path="/details" component={Details} />
+          <Route path="/details" component={Edit} />
         </div>
       </Router>
     );

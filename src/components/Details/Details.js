@@ -1,13 +1,27 @@
-import React, {Component} from 'react';
-class Details extends Component{
- 
-    render(){
-        return(
-        <div>
-            I am Details Component
-        </div>
+import React, { Component } from 'react';
+
+import MovieCard from '../MovieCard/MovieCard'
+import {connect} from 'react-redux'
+
+class Details extends Component {
+
+    render() {
+        let currentMovieIndex = this.props.reduxStore.currentMovie
+        return (
+            <div>
+                <MovieCard id={currentMovieIndex} />
+            </div>
         )
-    
+
     }
 }
-export default Details
+
+
+const mapStateToProps = (reduxStore) => {
+    return (
+        {
+            reduxStore
+        }
+    )
+}
+export default connect(mapStateToProps)(Details)

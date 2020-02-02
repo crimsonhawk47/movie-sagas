@@ -3,10 +3,10 @@ import { connect } from 'react-redux'
 import {withRouter} from 'react-router-dom'
 class MovieCard extends Component {
 
-    goToEditPage = (movieID) => {
+    goToDetailsPage = (movieID) => {
         console.log(`Heyooo my id is ${movieID}`);
         this.props.dispatch({type: 'SET_CURRENT_MOVIE', payload: movieID})
-        this.props.history.push('/edit')
+        this.props.history.push('/details')
     }
 
     render() {
@@ -18,7 +18,7 @@ class MovieCard extends Component {
         return (
             <div>
                     <p>{movie.title}</p>
-                    <img onClick={() => {this.goToEditPage(movieID)}} src={movie.poster} />
+                    <img onClick={() => {this.goToDetailsPage(movieID)}} src={movie.poster} />
                     <p>{movie.description}</p>
             </div>
 

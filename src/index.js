@@ -9,7 +9,7 @@ import { Provider } from 'react-redux';
 import logger from 'redux-logger';
 // Import saga middleware
 import createSagaMiddleware from 'redux-saga';
-import {takeEvery, put} from 'redux-saga/effects'
+import { takeEvery, put } from 'redux-saga/effects'
 import axios from 'axios';
 
 // Create the rootSaga generator function
@@ -19,10 +19,10 @@ function* rootSaga() {
 
 }
 
-function* getMovies(){
+function* getMovies() {
     let response = yield axios.get('/api/movies')
     console.log(response.data);
-    yield put({type: 'SET_MOVIES', payload:response.data})
+    yield put({ type: 'SET_MOVIES', payload: response.data })
 }
 
 
@@ -35,6 +35,15 @@ const movies = (state = [], action) => {
         case 'SET_MOVIES':
             console.log(`IAM REDUCER`);
             console.log(action.payload);
+            return action.payload;
+        default:
+            return state;
+    }
+}
+
+const currentMovie = (state = -1, action) => {
+    switch (action.type) {
+        case 'SET_CURRENT_MOVIE':
             return action.payload;
         default:
             return state;
@@ -56,6 +65,7 @@ const storeInstance = createStore(
     combineReducers({
         movies,
         genres,
+        currentMovie, 
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),
@@ -64,6 +74,6 @@ const storeInstance = createStore(
 // Pass rootSaga into our sagaMiddleware
 sagaMiddleware.run(rootSaga);
 
-ReactDOM.render(<Provider store={storeInstance}><App /></Provider>, 
+ReactDOM.render(<Provider store={storeInstance}><App /></Provider>,
     document.getElementById('root'));
 registerServiceWorker();

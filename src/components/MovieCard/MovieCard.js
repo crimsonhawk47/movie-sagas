@@ -1,22 +1,25 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
+import {withRouter} from 'react-router-dom'
 class MovieCard extends Component {
+
+    goToEditPage = (movieID) => {
+        console.log(`Heyooo my id is ${movieID}`);
+        this.props.dispatch({type: 'SET_CURRENT_MOVIE', payload: movieID})
+        this.props.history.push('/edit')
+    }
 
     render() {
 
-        let arrayIndex = this.props.id - 1
-        let movie = this.props.reduxStore.movies[arrayIndex]
-        console.log(`MOVIENAME = ${movie}`)
-        console.log(movie.title);
-
+        let movieID = this.props.id
+        let movieIndex = movieID - 1
+        let movie = this.props.reduxStore.movies[movieIndex]
 
         return (
             <div>
-                <li>
                     <p>{movie.title}</p>
-                    <img src={movie.poster} />
+                    <img onClick={() => {this.goToEditPage(movieID)}} src={movie.poster} />
                     <p>{movie.description}</p>
-                </li>
             </div>
 
 
@@ -30,4 +33,4 @@ const mapStateToProps = (reduxStore) => {
         { reduxStore }
     )
 }
-export default connect(mapStateToProps)(MovieCard)
+export default withRouter(connect(mapStateToProps)(MovieCard))

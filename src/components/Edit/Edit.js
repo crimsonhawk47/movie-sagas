@@ -1,13 +1,25 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux'
+import MovieCard from '../MovieCard/MovieCard'
 class Edit extends Component{
  
     render(){
+        let currentMovieIndex = this.props.reduxStore.currentMovie
         return(
         <div>
-            I am Edit Component
+            <MovieCard id={currentMovieIndex} />
         </div>
         )
     
     }
 }
-export default Edit
+
+
+const mapStateToProps = (reduxStore) => {
+    return(
+        {
+            reduxStore
+        }
+    )
+}
+export default connect(mapStateToProps)(Edit)

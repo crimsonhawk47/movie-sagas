@@ -16,6 +16,7 @@ import axios from 'axios';
 function* rootSaga() {
 
     yield takeEvery('GET_MOVIES', getMovies)
+    yield takeEvery('SET_DESCRIPTION', setDescription)
 
 }
 
@@ -23,6 +24,11 @@ function* getMovies() {
     let response = yield axios.get('/api/movies')
     console.log(response.data);
     yield put({ type: 'SET_MOVIES', payload: response.data })
+}
+
+function* setDescription(action) {
+    let response = yield axios.post('/api/movies', {id: action.payload})
+    
 }
 
 
@@ -41,7 +47,7 @@ const movies = (state = [], action) => {
     }
 }
 
-const currentMovie = (state = -1, action) => {
+const currentMovie = (state = 1, action) => {
     switch (action.type) {
         case 'SET_CURRENT_MOVIE':
             return action.payload;

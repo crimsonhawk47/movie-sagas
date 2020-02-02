@@ -18,4 +18,11 @@ router.get('/', (req,res) => {
     })
 })
 
+router.post('/', (req,res)=>{
+    console.log(req.body);
+    console.log(`HEYOOOO`);
+    res.sendStatus(200)
+    
+})
+
 module.exports = router

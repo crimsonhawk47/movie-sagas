@@ -17,7 +17,7 @@ function* rootSaga() {
 
     yield takeEvery('GET_MOVIES', getMovies)
     yield takeEvery('SET_DESCRIPTION', setDescription)
-    yield takeEvery('GET_SPECIFIC_MOVIE', getSpecificMovie)
+    // yield takeEvery('GET_SPECIFIC_MOVIE', getSpecificMovie)
 
 }
 
@@ -33,6 +33,7 @@ function* setDescription(action) {
         let newDescription = {id: action.payload.id, description: action.payload.description}
         let response = yield axios.post('/api/movies', newDescription)
         yield put({type: 'GET_MOVIES'})
+        
     }
     catch(error){
         console.log(error);
@@ -40,20 +41,20 @@ function* setDescription(action) {
     
 }
 
-function* getSpecificMovie(action){
-    try{
-        console.log(action.payload);
+// function* getSpecificMovie(action){
+//     try{
+//         console.log(action.payload);
         
-        let response = yield axios.get(`/api/movies/${action.payload}`);
+//         let response = yield axios.get(`/api/movies/${action.payload}`);
         
         
-        yield put({type:'SET_CURRENT_MOVIE', payload: response.data.id})
-    }
-    catch(error){
-        console.log(error);
+//         yield put({type:'SET_CURRENT_MOVIE', payload: response.data.id})
+//     }
+//     catch(error){
+//         console.log(error);
         
-    }
-}
+//     }
+// }
 
 
 // Create sagaMiddleware
@@ -70,20 +71,20 @@ const movies = (state = [], action) => {
     }
 }
 
-const currentMovie = (state = 1, action) => {
-    switch (action.type) {
-        case 'SET_CURRENT_MOVIE':
-            return action.payload;
-        default:
-            return state;
-    }
-}
+// const currentMovie = (state = 1, action) => {
+//     switch (action.type) {
+//         case 'SET_CURRENT_MOVIE':
+//             return action.payload;
+//         default:
+//             return state;
+//     }
+// }
 
 // Create one store that all components can use
 const storeInstance = createStore(
     combineReducers({
         movies,
-        currentMovie, 
+        // currentMovie, 
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),

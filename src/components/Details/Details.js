@@ -6,26 +6,26 @@ import { withRouter } from 'react-router-dom'
 
 class Details extends Component {
 
-    componentDidMount() {
-        console.log(this.props.match.params.id);
-
-        this.props.dispatch({ type: 'GET_SPECIFIC_MOVIE', payload: this.props.match.params.id })
-        // console.log(this.props.history.location);
-
-    }
+    // componentDidMount() {
+    //     this.props.dispatch({ type: 'GET_SPECIFIC_MOVIE', payload: this.props.match.params.id })
+    // }
 
     goToEdit = () => {
-        this.props.history.push('/edit')
+        this.props.history.push(`/edit/${this.props.match.params.id}`)
     }
 
     render() {
 
         let currentMovieID = this.props.match.params.id
+        let movieCard;
+        if(this.props.reduxStore.movies[0]){
+            movieCard = <MovieCard id={currentMovieID} showGenres={true} />;
+        }
         return (
             <div>
                 <button onClick={() => { this.props.history.push('/') }}>Back Home</button>
                 <button onClick={this.goToEdit}>Edit</button>
-                <MovieCard id={currentMovieID} showGenres={true} />
+                {movieCard}
             </div>
         )
 

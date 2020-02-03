@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
+import {withRouter} from 'react-router-dom';
 import MovieCard from '../MovieCard/MovieCard'
 class Edit extends Component {
 
@@ -8,19 +9,18 @@ class Edit extends Component {
     }
 
     changeText = (event) => {
-
         this.setState({ newText: event.target.value })
-        console.log(this.state.newText);
     }
 
     updateDescription = () => {
         console.log(`in update description`);
-        console.log(this.props.reduxStore.currentMovie);
+        let id = this.props.match.params.id
         this.props.dispatch({
             type: 'SET_DESCRIPTION',
-            payload: {id: this.props.reduxStore.currentMovie, description: this.state.newText}
+            payload: {id: id, description: this.state.newText}
         })
-        this.props.history.goBack();
+        this.props.history.push(`/details/${id}`);
+        
     }
 
     render() {
@@ -41,4 +41,4 @@ const mapStateToProps = (reduxStore) => {
                 )
             }
             
-export default connect(mapStateToProps)(Edit)
+export default withRouter(connect(mapStateToProps)(Edit))

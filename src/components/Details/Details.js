@@ -2,13 +2,16 @@ import React, { Component } from 'react';
 
 import MovieCard from '../MovieCard/MovieCard'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 
 class Details extends Component {
 
-    componentDidMount(){
-        this.props.dispatch({type: 'GET_SPECIFIC_MOVIE', payload: this.props.history.location})
+    componentDidMount() {
+        console.log(this.props.match.params.id);
+
+        this.props.dispatch({ type: 'GET_SPECIFIC_MOVIE', payload: this.props.match.params.id })
         // console.log(this.props.history.location);
-        
+
     }
 
     goToEdit = () => {
@@ -16,7 +19,8 @@ class Details extends Component {
     }
 
     render() {
-        let currentMovieID = this.props.reduxStore.currentMovie
+
+        let currentMovieID = this.props.match.params.id
         return (
             <div>
                 <button onClick={() => { this.props.history.push('/') }}>Back Home</button>
@@ -36,4 +40,4 @@ const mapStateToProps = (reduxStore) => {
         }
     )
 }
-export default connect(mapStateToProps)(Details)
+export default withRouter(connect(mapStateToProps)(Details))

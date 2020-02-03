@@ -5,6 +5,7 @@ class MovieCard extends Component {
 
     goToDetailsPage = (movieID) => {
         console.log(`Heyooo my id is ${movieID}`);
+        
         // this.props.dispatch({ type: 'SET_CURRENT_MOVIE', payload: movieID })
         this.props.history.push(`/details/${movieID}`)
     }
@@ -16,7 +17,7 @@ class MovieCard extends Component {
         let movie = this.props.reduxStore.movies[movieIndex]
         let genreDisplay;
 
-        if (this.props.showGenres) {
+        if (this.props.showGenres && movie) {
             genreDisplay = 
             <ul>
                 {movie.genres.map((genre, index) => {
@@ -25,14 +26,23 @@ class MovieCard extends Component {
             </ul>
         }
 
-        return (
-            <div>
-                <p>{movie.title}</p>
-                <img onClick={() => { this.goToDetailsPage(movieID) }} src={movie.poster} />
-                <p>{movie.description}</p>
-                {genreDisplay}
-            </div>
-        )
+        if (movie){
+            return (
+                <div>
+                    <p>{movie.title}</p>
+                    <img onClick={() => { this.goToDetailsPage(movieID) }} src={movie.poster} />
+                    <p>{movie.description}</p>
+                    {genreDisplay}
+                </div>
+            )
+        }
+        else{
+            return(
+                <div></div>
+            )
+        }
+
+        
 
     }
 }

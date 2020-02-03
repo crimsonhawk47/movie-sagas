@@ -30,7 +30,7 @@ router.get('/:id', (req, res) => {
                     ORDER BY "movies".id;`
     pool.query(queryText, [req.params.id])
         .then(response => {
-            res.send(response.rows)
+            res.send(response.rows[0])
         })
         .catch(err => {
             console.log(err);

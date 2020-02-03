@@ -45,9 +45,9 @@ function* getSpecificMovie(action){
         console.log(action.payload);
         
         let response = yield axios.get(`/api/movies/${action.payload}`);
-        console.log(response.data);
         
-        // yield put({type:'SET_CURRENT_MOVIE', payload: response.data})
+        
+        yield put({type:'SET_CURRENT_MOVIE', payload: response.data.id})
     }
     catch(error){
         console.log(error);

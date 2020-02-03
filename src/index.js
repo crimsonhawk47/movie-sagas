@@ -39,21 +39,6 @@ function* setDescription(action) {
     
 }
 
-// function* getSpecificMovie(action){
-//     try{
-//         console.log(action.payload);
-        
-//         let response = yield axios.get(`/api/movies/${action.payload}`);
-        
-        
-//         yield put({type:'SET_CURRENT_MOVIE', payload: response.data.id})
-//     }
-//     catch(error){
-//         console.log(error);
-        
-//     }
-// }
-
 
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
@@ -67,15 +52,6 @@ const movies = (state = [], action) => {
             return state;
     }
 }
-
-// const currentMovie = (state = 1, action) => {
-//     switch (action.type) {
-//         case 'SET_CURRENT_MOVIE':
-//             return action.payload;
-//         default:
-//             return state;
-//     }
-// }
 
 // Create one store that all components can use
 const storeInstance = createStore(

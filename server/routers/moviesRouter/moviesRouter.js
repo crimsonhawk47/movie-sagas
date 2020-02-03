@@ -21,24 +21,6 @@ router.get('/', (req, res) => {
         })
 })
 
-router.get('/:id', (req, res) => {
-    let queryText = `SELECT "movies".id, "movies".title, "movies".description, "movies".poster, array_agg("genres".name) as "genres" FROM "movies_genres"
-                    JOIN "movies" on movies_id = "movies".id
-                    JOIN "genres" on genres_id = "genres".id
-                    WHERE "movies".id = $1
-                    GROUP BY "movies".id, "movies".title, "movies".description, "movies".poster
-                    ORDER BY "movies".id;`
-    pool.query(queryText, [req.params.id])
-        .then(response => {
-            res.send(response.rows[0])
-        })
-        .catch(err => {
-            console.log(err);
-            res.sendStatus(500);
-
-        })
-})
-
 
 router.post('/', (req, res) => {
     console.log(`IN SERVER POST`);

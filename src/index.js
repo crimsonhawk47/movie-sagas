@@ -27,7 +27,18 @@ function* getMovies() {
 }
 
 function* setDescription(action) {
-    let response = yield axios.post('/api/movies', {id: action.payload})
+    try{
+        
+        let newDescription = {id: action.payload.id, description: action.payload.description}
+        console.log(`HEYOOOOOOOO ${newDescription.description}`);
+        console.log(newDescription);
+        
+        let response = yield axios.post('/api/movies', newDescription)
+        yield put({type: 'GET_MOVIES'})
+    }
+    catch(error){
+        console.log(error);
+    }
     
 }
 
@@ -39,7 +50,6 @@ const sagaMiddleware = createSagaMiddleware();
 const movies = (state = [], action) => {
     switch (action.type) {
         case 'SET_MOVIES':
-            console.log(`IAM REDUCER`);
             console.log(action.payload);
             return action.payload;
         default:

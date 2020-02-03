@@ -10,12 +10,12 @@ class Details extends Component {
     }
 
     render() {
-        let currentMovieIndex = this.props.reduxStore.currentMovie
+        let currentMovieID = this.props.reduxStore.currentMovie
         return (
             <div>
                 <button onClick={() => { this.props.history.push('/') }}>Back Home</button>
                 <button onClick={this.goToEdit}>Edit</button>
-                <MovieCard id={currentMovieIndex} />
+                <MovieCard id={currentMovieID} showGenres={true} />
             </div>
         )
 

@@ -18,8 +18,9 @@ class Edit extends Component {
         console.log(this.props.reduxStore.currentMovie);
         this.props.dispatch({
             type: 'SET_DESCRIPTION',
-            payload: this.props.reduxStore.currentMovie
+            payload: {id: this.props.reduxStore.currentMovie, description: this.state.newText}
         })
+        this.props.history.goBack();
     }
 
     render() {

@@ -12,8 +12,6 @@ router.get('/', (req, res) => {
                     ORDER BY "movies".id;`
     pool.query(queryText)
         .then(response => {
-            console.log(response.rows);
-
             res.send(response.rows)
         })
         .catch(err => {
@@ -23,11 +21,14 @@ router.get('/', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-    res.sendStatus(200)
+    console.log(`IN SERVER POST`);
+    
+    console.log(req.body);
+
     let queryText = `UPDATE "movies"
-        SET "description" = 'Derp'
+        SET "description" = $2
         WHERE "id" = $1;`
-    pool.query(queryText, [req.body.id])
+    pool.query(queryText, [req.body.id, req.body.description])
         .then((result) => {
             res.sendStatus(200)
         })

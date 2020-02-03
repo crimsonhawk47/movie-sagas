@@ -15,8 +15,10 @@ class MovieCard extends Component {
         let movieIndex = movieID - 1
         let movie = this.props.reduxStore.movies[movieIndex]
         let genreDisplay;
+
         if (this.props.showGenres) {
-            genreDisplay = <ul>
+            genreDisplay = 
+            <ul>
                 {movie.genres.map((genre, index) => {
                     return <li key={index}>{genre}</li>
                 })}
@@ -30,8 +32,6 @@ class MovieCard extends Component {
                 <p>{movie.description}</p>
                 {genreDisplay}
             </div>
-
-
         )
 
     }

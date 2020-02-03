@@ -9,11 +9,6 @@ class List extends Component{
         return(
         <div>
             {this.props.reduxStore.movies.map(movie => {
-                // return <li id={movie.id} key={movie.id}>
-                //     <p>{movie.name}</p>
-                //     <img src={movie.poster} />
-                //     <p>{movie.description}</p>
-                // </li>
                 return <MovieCard id={movie.id} key={movie.id} />
             })}
         </div>
@@ -21,6 +16,7 @@ class List extends Component{
     
     }
 }
+
 
 const mapStateToProps = (reduxStore) => {
     return(

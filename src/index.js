@@ -17,6 +17,7 @@ function* rootSaga() {
 
     yield takeEvery('GET_MOVIES', getMovies)
     yield takeEvery('SET_DESCRIPTION', setDescription)
+    // yield takeEvery('GET_SPECIFIC_MOVIE', getSpecificMovie)
 
 }
 
@@ -28,11 +29,7 @@ function* getMovies() {
 
 function* setDescription(action) {
     try{
-        
         let newDescription = {id: action.payload.id, description: action.payload.description}
-        console.log(`HEYOOOOOOOO ${newDescription.description}`);
-        console.log(newDescription);
-        
         let response = yield axios.post('/api/movies', newDescription)
         yield put({type: 'GET_MOVIES'})
     }
@@ -50,26 +47,6 @@ const sagaMiddleware = createSagaMiddleware();
 const movies = (state = [], action) => {
     switch (action.type) {
         case 'SET_MOVIES':
-            console.log(action.payload);
-            return action.payload;
-        default:
-            return state;
-    }
-}
-
-const currentMovie = (state = 1, action) => {
-    switch (action.type) {
-        case 'SET_CURRENT_MOVIE':
-            return action.payload;
-        default:
-            return state;
-    }
-}
-
-// Used to store the movie genres
-const genres = (state = [], action) => {
-    switch (action.type) {
-        case 'SET_GENRES':
             return action.payload;
         default:
             return state;
@@ -80,8 +57,7 @@ const genres = (state = [], action) => {
 const storeInstance = createStore(
     combineReducers({
         movies,
-        genres,
-        currentMovie, 
+        // currentMovie, 
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),

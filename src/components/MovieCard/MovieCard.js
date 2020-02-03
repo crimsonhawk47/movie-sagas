@@ -4,9 +4,9 @@ import { withRouter } from 'react-router-dom'
 class MovieCard extends Component {
 
     goToDetailsPage = (movieID) => {
-        console.log(`Heyooo my id is ${movieID}`);
-        this.props.dispatch({ type: 'SET_CURRENT_MOVIE', payload: movieID })
-        this.props.history.push('/details')
+        // console.log(`Heyooo my id is ${movieID}`);
+        // this.props.dispatch({ type: 'SET_CURRENT_MOVIE', payload: movieID })
+        this.props.history.push(`/details/${movieID}`)
     }
 
     render() {

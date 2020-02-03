@@ -16,9 +16,11 @@ router.get('/', (req, res) => {
         })
         .catch(err => {
             console.log(err);
+            res.sendStatus(500)
 
         })
 })
+
 
 router.post('/', (req, res) => {
     console.log(`IN SERVER POST`);

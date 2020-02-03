@@ -13,7 +13,6 @@ class Edit extends Component {
     }
 
     updateDescription = () => {
-        console.log(`in update description`);
         let id = this.props.match.params.id
         this.props.dispatch({
             type: 'SET_DESCRIPTION',

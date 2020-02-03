@@ -11,7 +11,8 @@ class Details extends Component {
     // }
 
     goToEdit = () => {
-        this.props.history.push(`/edit/${this.props.match.params.id}`)
+        let id = this.props.match.params.id
+        this.props.history.push(`/edit/${id}`)
     }
 
     render() {

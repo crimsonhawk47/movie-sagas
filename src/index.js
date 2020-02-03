@@ -29,11 +29,9 @@ function* getMovies() {
 
 function* setDescription(action) {
     try{
-
         let newDescription = {id: action.payload.id, description: action.payload.description}
         let response = yield axios.post('/api/movies', newDescription)
         yield put({type: 'GET_MOVIES'})
-        
     }
     catch(error){
         console.log(error);
@@ -64,7 +62,6 @@ const sagaMiddleware = createSagaMiddleware();
 const movies = (state = [], action) => {
     switch (action.type) {
         case 'SET_MOVIES':
-            console.log(action.payload);
             return action.payload;
         default:
             return state;
